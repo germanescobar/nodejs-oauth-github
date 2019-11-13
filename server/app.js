@@ -1,12 +1,16 @@
 const path = require('path')
 const express = require('express')
+const mongoose = require("mongoose")
 const routes = require('./routes')
 
 const app = express()
 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/oauth', { useNewUrlParser: true })
+
 app.use(express.json())
 app.use(express.static(path.resolve(__dirname, '../dist')))
 
+require("./models/User");
 app.use('/', routes)
 
 const isDev = process.env.NODE_ENV !== 'production'
