@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 const schema = mongoose.Schema({
   email: {
