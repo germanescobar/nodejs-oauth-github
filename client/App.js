@@ -1,24 +1,22 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import PrivateRoute from './PrivateRoute'
+import Home from './Home'
+import Login from './Login'
+import GithubCallback from './GithubCallback'
+import NotFound from './NotFound'
 import axios from 'axios'
 import './styles/styles.scss'
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = { status: "" }
-  }
-
-  async componentDidMount() {
-    const response = await axios.get("/api/something")
-    const data = await response.data
-
-    this.setState({ status: data.status })
-  }
-
-  render () {
-    return (
-      <h1>Hello! {this.state.status}</h1>
-    )
-  }
+export default () => {
+  return (
+    <Router>
+      <Switch>
+        <PrivateRoute exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/github/callback" component={GithubCallback} />
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
+  )
 }
