@@ -62,7 +62,10 @@ router.post("/auth/github/token", async (req, res, next) => {
   } catch (e) {
     next(e)
   }
+})
 
+router.get("/auth/github/mobile", () => {
+  res.redirect(`https://auth.expo.io/@germanescobar/github?code=${req.query.code}`)
 })
 
 module.exports = router
